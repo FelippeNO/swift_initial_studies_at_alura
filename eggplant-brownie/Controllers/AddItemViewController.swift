@@ -1,5 +1,5 @@
 //
-//  AdicionarItensViewController.swift
+//  AddItemViewController.swift
 //  eggplant-brownie
 //
 //  Created by Felippe Negrão de Oliveira on 05/07/22.
@@ -8,12 +8,13 @@
 
 import UIKit
 
-class AdicionarItensViewController: UIViewController {
+class AddItemViewController: UIViewController {
     
     //MARK: - IBOutlets
     
     @IBOutlet weak var nomeItemTextField: UITextField!
     @IBOutlet weak var qntdCaloriasTextField: UITextField!
+    @IBOutlet weak var botaoAdd: UIButton!
     
     //MARK: - View life cycle
     
@@ -22,9 +23,9 @@ class AdicionarItensViewController: UIViewController {
     }
     
     //MARK: - IBAction
+
     
-    @IBAction func adicionarItem(_ sender: Any) {
-        
+    @IBAction func addItem(_ sender: Any) {
         guard let nomeItem = nomeItemTextField.text, let qntdCalorias = qntdCaloriasTextField.text else {return}
         
         if let numeroDeCalorias = Double(qntdCalorias){
@@ -32,4 +33,5 @@ class AdicionarItensViewController: UIViewController {
             navigationController?.popViewController(animated: true)
         }
     }
+    
 }
