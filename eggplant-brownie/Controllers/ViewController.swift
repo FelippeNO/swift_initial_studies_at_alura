@@ -16,11 +16,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //MARK: - Atributos
     
     var delegate: AdicionaRefeicaoViewControllerDelegate?
-    var itens: Array<String> = [
-        "molho de tomate",
-        "amora",
-        "queijo"
+    var itens: Array<Item> = [
+        Item(nome: "Molho de Tomate", calorias: 20.3),
+        Item(nome: "Queijo", calorias: 80.3),
+        Item(nome: "Fermento", calorias: 35.2),
+        Item(nome: "Camarão", calorias: 54.5),
+        Item(nome: "Leite", calorias: 12.5),
     ];
+    
+    var itensSelecionados: Array<Item> = []
     
     //MARK: - IBOutlets
     
@@ -35,7 +39,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let celula = UITableViewCell(style: .default, reuseIdentifier: nil);
-        celula.textLabel?.text = itens[indexPath.row];
+        celula.textLabel?.text = itens[indexPath.row].nome;
         return celula;
     }
     
@@ -45,8 +49,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         if celula.accessoryType == .none {
             celula.accessoryType = .checkmark
+            let linhaDaTabela = indexPath.row
+            itensSelecionados.append(itens[linhaDaTabela])
         } else {
             celula.accessoryType = .none;
+            let item = itens[indexPath.row]
+            if let position = itensSelecionados.firstIndex(of: item){
+                itensSelecionados.remove(at: position)
+            }
         }
     }
     
@@ -62,7 +72,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             return
         }
         
-        let refeicao = Refeicao(nome: nomeDaRefeicao, felicidade: felicidade)
+        let refeicao = Refeicao(nome: nomeDaRefeicao, felicidade: felicidade, itens: itensSelecionados)
         
         print("comi \(refeicao.nome) e fiquei com felicidade: \(refeicao.felicidade)")
         delegate?.add(a: refeicao);
