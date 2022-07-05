@@ -33,10 +33,17 @@ class RefeicoesTableViewController: UITableViewController, AdicionaRefeicaoViewC
         
         let celula:UITableViewCell = UITableViewCell(style: .default, reuseIdentifier: nil);
         let refeicaoString:String = refeicoes[indexPath.row].nome;
-        
         celula.textLabel?.text = refeicaoString;
         
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(mostrarDetalhes(_:)))
+        
+        celula.addGestureRecognizer(longPressGesture)
+        
         return celula;
+    }
+    
+    @objc func mostrarDetalhes(_ gesture: UILongPressGestureRecognizer){
+        print("LONG PRESSED")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
