@@ -10,25 +10,23 @@ import UIKit
 
 class RefeicoesTableViewController: UITableViewController{
     
-    let refeicoes:Array<Refeicao> = [
+    var refeicoes:Array<Refeicao> = [
         Refeicao(nome: "Pizza", felicidade: 4),
         Refeicao(nome: "Café", felicidade: 5),
         Refeicao(nome: "Bolo", felicidade: 3),
         Refeicao(nome: "Acarajé", felicidade: 5),
         Refeicao(nome: "Japonesa", felicidade: 1),
     ];
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
+    
     //Dois métodos obrigatórios para criaco de TableView.
     //Quantidade de celulas e conteudo.
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return refeicoes.count;
-        
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -41,6 +39,15 @@ class RefeicoesTableViewController: UITableViewController{
         return celula;
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let viewController = segue.destination as? ViewController {
+            viewController.tableViewController = self;
+        }
+    }
     
+    func add(_ refeicao: Refeicao){
+        refeicoes.append(refeicao);
+        tableView.reloadData();
+    }
     
 }
