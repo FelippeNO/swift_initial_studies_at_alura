@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RefeicoesTableViewController: UITableViewController{
+class RefeicoesTableViewController: UITableViewController, ViewControllerDelegate{
     
     var refeicoes:Array<Refeicao> = [
         Refeicao(nome: "Pizza", felicidade: 4),
@@ -43,16 +43,13 @@ class RefeicoesTableViewController: UITableViewController{
         
         if segue.identifier == "adicionar"{
             if let viewController = segue.destination as? ViewController {
-                viewController.tableViewController = self;
+                viewController.delegate = self;
             }
         }
-        
-  
     }
     
     func add(a refeicao: Refeicao){
         refeicoes.append(refeicao);
         tableView.reloadData();
     }
-    
 }
