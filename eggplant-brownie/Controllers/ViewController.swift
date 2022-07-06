@@ -44,7 +44,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @objc func adicionarItem(){
         let adicionarItensViewController = AddItemViewController(delegate: self)
-       navigationController?.pushViewController(adicionarItensViewController, animated: true)
+        navigationController?.pushViewController(adicionarItensViewController, animated: true)
     }
     
     func add(_ item: Item) {
@@ -81,21 +81,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    //MARK: - IBActions
-    
-    @IBAction func adicionar(_ sender: Any) {
-        
+    func recuperaRefeicaoDoFormulario() -> Refeicao? {
         guard let nomeDaRefeicao = nomeTextField?.text else {
-            return
+            Alerta(controller: self).exibe(message: "Erro ao ler nome")
+            return nil
         }
         
         guard let felicidadeDaRefeicao = felicidadeTextField?.text, let felicidade = Int(felicidadeDaRefeicao) else {
-            return
+            Alerta(controller: self).exibe(message: "Erro ao ler felicidade")
+            return nil
         }
-        
-        let refeicao = Refeicao(nome: nomeDaRefeicao, felicidade: felicidade, itens: itensSelecionados)
-        
-        print("comi \(refeicao.nome) e fiquei com felicidade: \(refeicao.felicidade)")
+        return Refeicao(nome: nomeDaRefeicao, felicidade: felicidade, itens: itensSelecionados)
+    }
+    
+    //MARK: - IBActions
+    
+    @IBAction func adicionar(_ sender: Any) {
+        guard let refeicao = recuperaRefeicaoDoFormulario() else {return}
         delegate?.add(a: refeicao);
         navigationController?.popViewController(animated: true)
     }
