@@ -8,7 +8,8 @@
 
 import UIKit
 
-class Item: NSObject, NSCoding {
+class Item: NSObject, NSCoding, NSSecureCoding {
+    static var supportsSecureCoding: Bool = true
     
     // MARK: - Atributos
     

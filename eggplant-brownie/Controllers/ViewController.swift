@@ -40,6 +40,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad() {
         let botaoAdicionaItem = UIBarButtonItem(title: "Adicionar", style: .plain, target: self, action: #selector(adicionarItem))
         navigationItem.rightBarButtonItem = botaoAdicionaItem
+        
+        do {
+            guard let caminho = recuperaDiretorio() else {return}
+            let dados = try Data(contentsOf: caminho)
+            let itensSalvos = try NSKeyedUnarchiver.unarchivedArrayOfObjects(ofClass: Item.self, from: dados)!
+            itens = itensSalvos;
+            
+        } catch {
+            print(error.localizedDescription)
+        }
     }
     
     @objc func adicionarItem(){
@@ -50,6 +60,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func add(_ item: Item) {
         itens.append(item)
         itensTableView.reloadData();
+        
+        do{
+            let dados = try NSKeyedArchiver.archivedData(withRootObject: itens, requiringSecureCoding: false)
+            guard let caminho = recuperaDiretorio() else {return}
+            try dados.write(to: caminho)
+        } catch{
+            print(error.localizedDescription)
+        }
+    }
+    
+    func recuperaDiretorio() -> URL? {
+        guard let diretorio = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {return nil}
+        let caminho = diretorio.appendingPathComponent("itens")
+        return caminho
     }
     
     //MARK: - UITableViewDataSource
