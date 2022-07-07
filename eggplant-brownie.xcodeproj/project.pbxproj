@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		240AFEBE2876581800647D25 /* RemoveRefeicaoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240AFEBD2876581800647D25 /* RemoveRefeicaoViewController.swift */; };
 		244D5CE92874E3E00054911F /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244D5CE72874E3E00054911F /* AddItemViewController.swift */; };
 		244D5CEA2874E3E00054911F /* AddItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244D5CE82874E3E00054911F /* AddItemViewController.xib */; };
 		247D916828753819006B91CB /* Alerta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247D916728753819006B91CB /* Alerta.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		240AFEBD2876581800647D25 /* RemoveRefeicaoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveRefeicaoViewController.swift; sourceTree = "<group>"; };
 		244D5CE72874E3E00054911F /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
 		244D5CE82874E3E00054911F /* AddItemViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddItemViewController.xib; sourceTree = "<group>"; };
 		247D916728753819006B91CB /* Alerta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerta.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				244D5CE72874E3E00054911F /* AddItemViewController.swift */,
 				B90829C82221AF9600EA37C8 /* ViewController.swift */,
 				248454CF28747DC1004661B3 /* RefeicoesTableViewController.swift */,
+				240AFEBD2876581800647D25 /* RemoveRefeicaoViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -181,6 +184,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				240AFEBE2876581800647D25 /* RemoveRefeicaoViewController.swift in Sources */,
 				B9EFBAEA223D775300B773B2 /* Item.swift in Sources */,
 				B90829C92221AF9600EA37C8 /* ViewController.swift in Sources */,
 				248454D028747DC1004661B3 /* RefeicoesTableViewController.swift in Sources */,
