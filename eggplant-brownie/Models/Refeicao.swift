@@ -57,7 +57,7 @@ class Refeicao: NSObject, NSCoding, NSSecureCoding {
     required init?(coder: NSCoder) {
         nome = coder.decodeObject(forKey: "nome") as! String
         felicidade = coder.decodeInteger(forKey: "felicidade")
-       // itens = coder.decodeObject(forKey: "itens") as! Array<Item>
+        itens = coder.decodeArrayOfObjects(ofClass: Item.self, forKey: "itens")!
     }
 }
 

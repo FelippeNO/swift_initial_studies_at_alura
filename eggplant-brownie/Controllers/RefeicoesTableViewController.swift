@@ -62,7 +62,6 @@ class RefeicoesTableViewController: UITableViewController, AdicionaRefeicaoViewC
     }
     
     func add(a refeicao: Refeicao){
-        
         refeicoes.append(refeicao);
         RefeicaoDAO().save(refeicoes)
         tableView.reloadData();
