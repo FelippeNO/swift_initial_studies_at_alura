@@ -57,8 +57,6 @@ class RefeicoesTableViewController: UITableViewController, AdicionaRefeicaoViewC
         }
     }
     
-    
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "adicionar"{
             if let viewController = segue.destination as? ViewController {
@@ -69,6 +67,20 @@ class RefeicoesTableViewController: UITableViewController, AdicionaRefeicaoViewC
     
     func add(a refeicao: Refeicao){
         refeicoes.append(refeicao);
+        
+        guard let diretorio = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {return}
+        let caminho = diretorio.appendingPathComponent("refeicao")
+        
+        do{
+            let dados = try NSKeyedArchiver.archivedData(withRootObject: refeicoes, requiringSecureCoding: false)
+            try dados.write(to: caminho)
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        
+        
+        
         tableView.reloadData();
     }
 }
