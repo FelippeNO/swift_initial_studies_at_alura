@@ -11,29 +11,11 @@ import UIKit
 class RefeicoesTableViewController: UITableViewController, AdicionaRefeicaoViewControllerDelegate{
     
     var refeicoes:Array<Refeicao> = [
-        Refeicao(nome: "Pizza", felicidade: 4),
-        Refeicao(nome: "Café", felicidade: 5),
-        Refeicao(nome: "Bolo", felicidade: 3),
-        Refeicao(nome: "Acarajé", felicidade: 5),
-        Refeicao(nome: "Japonesa", felicidade: 1),
     ];
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let caminho = recuperaCaminho() else {return}
-        do{
-            let dados = try Data(contentsOf: caminho)
-            guard let refeicoesSalvas = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(dados) as? Array<Refeicao> else {return}
-            refeicoes = refeicoesSalvas
-        } catch{
-            print(error.localizedDescription)
-        }
-    }
-    
-    func recuperaCaminho() -> URL? {
-        guard let diretorio = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {return nil}
-        let caminho = diretorio.appendingPathComponent("refeicao")
-        return caminho
+        refeicoes = RefeicaoDAO().recupera()
     }
     
     //Dois métodos obrigatórios para criaco de TableView.
@@ -82,17 +64,7 @@ class RefeicoesTableViewController: UITableViewController, AdicionaRefeicaoViewC
     func add(a refeicao: Refeicao){
         
         refeicoes.append(refeicao);
-        guard let caminho = recuperaCaminho() else {return}
-        do{
-            let dados = try NSKeyedArchiver.archivedData(withRootObject: refeicoes, requiringSecureCoding: false)
-            try dados.write(to: caminho)
-        } catch {
-            print(error.localizedDescription)
-        }
-        
-        
-        
-        
+        RefeicaoDAO().save(refeicoes)
         tableView.reloadData();
     }
 }

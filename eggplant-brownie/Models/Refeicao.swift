@@ -8,7 +8,9 @@
 
 import UIKit
 
-class Refeicao: NSObject, NSCoding {
+class Refeicao: NSObject, NSCoding, NSSecureCoding {
+    static var supportsSecureCoding: Bool = true
+    
     
     // MARK: - Atributos
     
@@ -55,7 +57,7 @@ class Refeicao: NSObject, NSCoding {
     required init?(coder: NSCoder) {
         nome = coder.decodeObject(forKey: "nome") as! String
         felicidade = coder.decodeInteger(forKey: "felicidade")
-        itens = coder.decodeObject(forKey: "itens") as! Array<Item>
+       // itens = coder.decodeObject(forKey: "itens") as! Array<Item>
     }
 }
 
